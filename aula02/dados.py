@@ -27,8 +27,6 @@ def ler_livros():
         print("Algum erro aconteceu na leitura do arquivo", error)
 
     return livros
-
-
 def calcular_preco_medio(livros):
     """Soma os preços de todos os livros e divide pelo total.
 
@@ -43,8 +41,19 @@ def calcular_preco_medio(livros):
 
     preco_medio: float = soma / len(livros)
     return preco_medio
-
-
+def converter_preco(preco):
+    return float(preco.replace("£", ""))
+def converter_nota(nota):
+    if nota == "Five":
+        return 5
+    elif nota == "Four":
+        return 4
+    elif nota == "Three":
+        return 3
+    elif nota == "Two":
+        return 2
+    else: 
+        return 1
 def contar_cinco_estrelas(livros):
     """Conta quantos livros têm a nota máxima. A nota vem como texto ("Five")."""
     contador: int = 0
@@ -54,8 +63,6 @@ def contar_cinco_estrelas(livros):
             contador += 1
 
     return contador
-
-
 def encontrar_mais_caro(livros):
     """Devolve o livro de maior preço. O preço vem como texto ("£51.77")."""
     mais_caro = livros[0]
@@ -65,9 +72,34 @@ def encontrar_mais_caro(livros):
         if preco > preco_mais_caro:
             mais_caro = livro
     return mais_caro
+def preparar_livros(linhas):
+    livros = []
+    for linha in linhas:
+        livro = {
+            "titulo": linha["titulo"],
+            "preco": converter_preco(linha["preco"]),
+            "categoria": linha["categoria"],
+            "nota": converter_nota(linha["nota"]),
+            "url": linha["url"]
+        }
+        livros.append(livro)
 
+    return livros
+def carregar_livros():
+    return preparar_livros(ler_livros())
 
 if __name__ == "__main__":
     livros = ler_livros()
     print(f"{len(livros)} livros carregados")
     print("Primeiro livro:", livros[0])
+
+preco_original = "£37.33"
+print(f"Preco")
+
+
+
+
+
+
+
+livros_convertidos = preparar_livros(livros)
