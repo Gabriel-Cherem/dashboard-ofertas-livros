@@ -26,8 +26,6 @@ def ler_livros():
         if arquivo is not None:
             arquivo.close()
 
-    return livros
-
 
 livros = ler_livros()
 print(f"A quantidade de livros da coleção é de {len(livros)} livros. ")
