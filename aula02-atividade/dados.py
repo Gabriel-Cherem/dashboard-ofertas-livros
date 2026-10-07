@@ -49,6 +49,13 @@ def contar_cinco_estrelas(livros):
     return contador
 
 
+def buscar_por_titulo(livros, busca):
+    resultado = []
+    for livro in livros:
+        if busca.lower() in livro["titulo"].lower():
+            resultado.append(livro)
+    return resultado
+
 def encontrar_mais_caro(livros):
     """Devolve o livro de maior preço. O preço vem como texto ("£51.77")."""
     mais_caro = livros[0]

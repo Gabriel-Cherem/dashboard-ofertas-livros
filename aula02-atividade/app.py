@@ -46,7 +46,20 @@ def main():
     st.title("📚 Dashboard de Livros")
 
     livros = dados.carregar_livros()
+
+    busca = st.text_input("Buscar por título", "")
+    if busca:
+        livros = dados.buscar_por_titulo(livros, busca)
+        if len(livros) == 0:
+            st.warning("Nenhum livro encontrado.")
+        else:
+            st.write(f"{len(livros)} livros encontrados")
+    else:
+        st.write(f"{len(livros)} livros encontrados")
+
     tabela = montar_tabela(livros)
+
+    st.dataframe(tabela)
 
     col1, col2, col3, col4 = st.columns(4)
     qtd_livros = len(livros)
