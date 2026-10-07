@@ -11,12 +11,11 @@ CAMINHO_LIVROS = PASTA / "livros.csv"
 
 
 def ler_livros():
-    
+    arquivo = None
     livros = []
     try:
         with open("livros.csv", encoding="utf-8", newline="") as arquivo:
             leitor = csv.DictReader(arquivo)
-            print(arquivo.readline())
             for linha in leitor:
                 livros.append(linha)       
     except FileNotFoundError: 
@@ -26,6 +25,8 @@ def ler_livros():
     finally:
         if arquivo is not None:
             arquivo.close()
+
+    return livros
 
 
 livros = ler_livros()
